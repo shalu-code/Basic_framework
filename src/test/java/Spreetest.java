@@ -2,9 +2,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import suite.SuiteManager;
-import sun.jvm.hotspot.utilities.Assert;
+import testdata.loginCredentials;
 import util.DriverManager;
 
 import java.sql.SQLOutput;
@@ -12,18 +13,34 @@ import java.util.ArrayList;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import util.ConfigFileReader;
 
 public class Spreetest extends SuiteManager {
 
-
+ /*private static ConfigFileReader config=new ConfigFileReader();
+    String userName;
+    String password;
     //public static WebDriver driver;
-    @Test
-    public void verifyLogin() {
+    @BeforeTest
+    public void getUsernamePassword(){
+        DriverManager.driver.manage().window().maximize();
+        String userName=config.getProperty("username");
+        String password=config.getProperty("password");
+
+
+    }*/
+
+
+    @Test(dataProvider = "loginCredentials",dataProviderClass = loginCredentials.class)
+    public void verifyLogin(String userName ,String password) {
+        /*
+
+         */
 
        // DriverManager driverManager = new DriverManager();
         DriverManager.driver.findElement(By.xpath("//a[contains(text(),'Login')]")).click();
-        DriverManager.driver.findElement(By.id("spree_user_email")).sendKeys("shalinip1017@gmail.com");
-        DriverManager.driver.findElement(By.id("spree_user_password")).sendKeys("shalu1234");
+        DriverManager.driver.findElement(By.id("spree_user_email")).sendKeys(userName);
+        DriverManager.driver.findElement(By.id("spree_user_password")).sendKeys(password);
         DriverManager.driver.findElement(By.xpath("//*[@name='commit']")).click();
         String actualdata = "Logged in successfully";
         String expectedata = DriverManager.driver.findElement(By.xpath("//main[@id='content']//*[@class='alert alert-success']")).getText();
@@ -35,12 +52,21 @@ public class Spreetest extends SuiteManager {
         } else {
             System.out.println("fail");
         }
-        DriverManager.driver.findElement(By.xpath("//a[@href='/t/bags']")).click();
+        /*DriverManager.driver.findElement(By.xpath("//a[@href='/t/bags']")).click();
         List<WebElement> prod = DriverManager.driver.findElements(By.className("card"));
         System.out.println("the size of the prod list " +prod.size());
 
-        //driver.close();
 
+       /* public void createAccount() {
+
+            //WebDriver driver;
+            DriverManager.driver.findElement(By.linkText("Create a new account")).click();
+            //driver.findElement()
+            DriverManager.driver.findElement(By.id("spree_user_email")).sendKeys("shalinip1017@gmail.com");
+            DriverManager.driver.findElement(By.id("spree_user_password")).sendKeys("shalu1234");
+            DriverManager.driver.findElement(By.id("spree_user_password_confirmation")).sendKeys("shalu1234");
+            DriverManager.driver.findElement(By.name("commit")).click();
+        }*/
     }
 
 
