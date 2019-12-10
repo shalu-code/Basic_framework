@@ -8,6 +8,9 @@ import util.DriverManager;
 import java.util.concurrent.TimeUnit;
 
 public class searchPage extends SuiteManager {
+
+
+
    String searchItem;
     private static ConfigFileReader config=new ConfigFileReader();
 

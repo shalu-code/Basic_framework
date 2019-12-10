@@ -4,6 +4,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import pages.BasePage;
+import pages.HomePage;
+import pages.LoginPage;
 import suite.SuiteManager;
 import testdata.loginCredentials;
 import util.DriverManager;
@@ -16,6 +19,8 @@ import java.util.concurrent.TimeUnit;
 import util.ConfigFileReader;
 
 public class Spreetest extends SuiteManager {
+
+    //String emailInput=""
 
  /*private static ConfigFileReader config=new ConfigFileReader();
     String userName;
@@ -30,6 +35,9 @@ public class Spreetest extends SuiteManager {
 
     }*/
 
+    public BasePage basepage;
+    public LoginPage loginpage;
+    public HomePage homepage;
 
     @Test(dataProvider = "loginCredentials",dataProviderClass = loginCredentials.class)
     public void verifyLogin(String userName ,String password) {
@@ -38,10 +46,17 @@ public class Spreetest extends SuiteManager {
          */
 
        // DriverManager driverManager = new DriverManager();
-        DriverManager.driver.findElement(By.xpath("//a[contains(text(),'Login')]")).click();
-        DriverManager.driver.findElement(By.id("spree_user_email")).sendKeys(userName);
-        DriverManager.driver.findElement(By.id("spree_user_password")).sendKeys(password);
-        DriverManager.driver.findElement(By.xpath("//*[@name='commit']")).click();
+        basepage =new BasePage();
+        loginpage = basepage.clickLoginButton();
+        homepage = loginpage.login(userName,password);
+
+
+
+
+        //DriverManager.driver.findElement(By.xpath("//a[contains(text(),'Login')]")).click();
+        //DriverManager.driver.findElement(By.id("spree_user_email")).sendKeys(userName);
+       // DriverManager.driver.findElement(By.id("spree_user_password")).sendKeys(password);
+       // DriverManager.driver.findElement(By.xpath("//*[@name='commit']")).click();
         String actualdata = "Logged in successfully";
         String expectedata = DriverManager.driver.findElement(By.xpath("//main[@id='content']//*[@class='alert alert-success']")).getText();
         System.out.println("excepted text is" + expectedata);
