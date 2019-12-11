@@ -9,13 +9,14 @@ import util.DriverManager;
 
 public class BasePage extends SuiteManager {
 
-    public BasePage(){
+    public BasePage(WebDriver driver){
         PageFactory.initElements(DriverManager.driver,this);
     }
     @FindBy(css = "#link-to-login")
     private WebElement loginButton;
 
     public LoginPage clickLoginButton(){
+
         loginButton.click();
         return new LoginPage();
     }

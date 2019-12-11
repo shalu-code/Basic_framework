@@ -2,6 +2,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.BasePage;
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import util.ConfigFileReader;
+
+import javax.swing.*;
 
 public class Spreetest extends SuiteManager {
 
@@ -39,6 +42,9 @@ public class Spreetest extends SuiteManager {
     public LoginPage loginpage;
     public HomePage homepage;
 
+   // Actions builder=new Actions(DriverManager.driver);
+    //builder.dr
+
     @Test(dataProvider = "loginCredentials",dataProviderClass = loginCredentials.class)
     public void verifyLogin(String userName ,String password) {
         /*
@@ -46,7 +52,7 @@ public class Spreetest extends SuiteManager {
          */
 
        // DriverManager driverManager = new DriverManager();
-        basepage =new BasePage();
+        basepage =new BasePage(DriverManager.driver);
         loginpage = basepage.clickLoginButton();
         homepage = loginpage.login(userName,password);
 
