@@ -21,16 +21,18 @@ public class SuiteManager {
     @BeforeSuite(alwaysRun = true)
     public void startDriver() throws MalformedURLException {
 
+        //driverManager=new DriverManager();
         driverManager =new DriverManager();
 
     }
 
-   @AfterSuite(alwaysRun = true)
+  /* @AfterSuite(alwaysRun = true)
     public void quitDriver() {
 
+
         driverManager.driver.quit();
-   }
-   @BeforeClass
+   }*/
+   //@BeforeClass
    public void launchUrl() {
 
         DriverManager.driver.manage().window().maximize();

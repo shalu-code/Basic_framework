@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,6 +21,9 @@ public class LoginPage extends SuiteManager {
     @FindBy(name="commit")
     private WebElement submit;
 
+    @FindBy(xpath = "//main[@id='content']//*[@class='alert alert-success']")
+    private WebElement successText;
+
     public void enterValue(WebElement field, String value){
 
         field.click();
@@ -33,5 +37,25 @@ public class LoginPage extends SuiteManager {
         submit.click();
         return new HomePage();
   }
+
+
+
+
+  public void successMsg(){
+
+      String actualdata = "Logged in successfully";
+      String expectedata=successText.getText();
+
+     // String expectedata = DriverManager.driver.findElement(By.xpath("//main[@id='content']//*[@class='alert alert-success']")).getText();
+      System.out.println("excepted text is" + expectedata);
+
+
+      if (actualdata.equals(expectedata)) {
+          System.out.println("pass");
+      } else {
+          System.out.println("fail");
+      }
+  }
+
 
 }

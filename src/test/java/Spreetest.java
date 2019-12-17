@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import pages.BasePage;
 import pages.HomePage;
 import pages.LoginPage;
+import pages.SearchResultPage;
 import suite.SuiteManager;
 import testdata.loginCredentials;
 import util.DriverManager;
@@ -22,6 +23,7 @@ import util.ConfigFileReader;
 import javax.swing.*;
 
 public class Spreetest extends SuiteManager {
+    private static ConfigFileReader config=new ConfigFileReader();
 
     //String emailInput=""
 
@@ -41,11 +43,12 @@ public class Spreetest extends SuiteManager {
     public BasePage basepage;
     public LoginPage loginpage;
     public HomePage homepage;
+    public SearchResultPage searchpage;
 
    // Actions builder=new Actions(DriverManager.driver);
     //builder.dr
 
-    @Test(dataProvider = "loginCredentials",dataProviderClass = loginCredentials.class)
+    @Test(dataProvider = "loginCredentials",dataProviderClass = loginCredentials.class )
     public void verifyLogin(String userName ,String password) {
         /*
 
@@ -55,11 +58,13 @@ public class Spreetest extends SuiteManager {
         basepage =new BasePage(DriverManager.driver);
         loginpage = basepage.clickLoginButton();
         homepage = loginpage.login(userName,password);
+        loginpage.successMsg();
+
+        //List<String> products=searchpage.prodlist();
 
 
 
-
-        //DriverManager.driver.findElement(By.xpath("//a[contains(text(),'Login')]")).click();
+        /*DriverManager.driver.findElement(By.xpath("//a[contains(text(),'Login')]")).click();
         //DriverManager.driver.findElement(By.id("spree_user_email")).sendKeys(userName);
        // DriverManager.driver.findElement(By.id("spree_user_password")).sendKeys(password);
        // DriverManager.driver.findElement(By.xpath("//*[@name='commit']")).click();
@@ -73,6 +78,7 @@ public class Spreetest extends SuiteManager {
         } else {
             System.out.println("fail");
         }
+
         /*DriverManager.driver.findElement(By.xpath("//a[@href='/t/bags']")).click();
         List<WebElement> prod = DriverManager.driver.findElements(By.className("card"));
         System.out.println("the size of the prod list " +prod.size());
@@ -91,6 +97,24 @@ public class Spreetest extends SuiteManager {
     }
 
 
+@Test
+    public void verifyProductList(){
+        String searchitem=config.getProperty("searchItem");
+    String username=config.getProperty("username");
+    String password=config.getProperty("password");
+
+
+    basepage =new BasePage(DriverManager.driver);
+    loginpage = basepage.clickLoginButton();
+    homepage = loginpage.login(username,password);
+    loginpage.successMsg();
+    searchpage=homepage.enterSearchItem(searchitem);
+    searchpage.oneProduct();
+
+
+
+
+}
 
 
 }
