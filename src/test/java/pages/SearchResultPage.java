@@ -9,6 +9,7 @@ import suite.SuiteManager;
 import util.ConfigFileReader;
 import util.DriverManager;
 
+import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,8 @@ public class SearchResultPage extends SuiteManager {
     }
     @FindBy(xpath = "//*[@id='products']//a")
     private List<WebElement> BagList;
+    @FindBy(xpath = "//*[@title='Ruby on Rails Bag']")
+    private WebElement RailsBag;
 
 
    /*public List<String> prodlist(WebElement List) {
@@ -33,33 +36,31 @@ public class SearchResultPage extends SuiteManager {
         }
         return currentOptions;
     }*/
-    public void oneProduct(){
+    public List<String> oneProduct() {
 
 
         int prodSize = BagList.size();
         System.out.println(prodSize);
-        if(prodSize>0) {
-            for (int i = 0; i <prodSize; i++) {
 
-                String title = BagList.get(i).getText();
-                System.out.println(title);
 
-                Assert.assertTrue(title.toLowerCase().contains(config.getProperty("searchItem")));
+        List<String> produlist = new ArrayList<>();
+
+
+            for (int i = 0; i < prodSize; i++) {
+
+
+
+                produlist.add(BagList.get(i).getText());
+
 
             }
-
-        }
-        else {
-            System.out.println("products are not matching");
-
-        }
-
+        return produlist;
     }
 
-//public void items(){
+    public productDetails clickOnProduct(){
 
-       //int size= prodlist(BagList).size();
-
-//}
+        RailsBag.click();
+       return new productDetails();
+    }
 
 }

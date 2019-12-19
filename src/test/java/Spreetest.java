@@ -3,12 +3,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import pages.BasePage;
-import pages.HomePage;
-import pages.LoginPage;
-import pages.SearchResultPage;
+import pages.*;
 import suite.SuiteManager;
 import testdata.loginCredentials;
 import util.DriverManager;
@@ -44,6 +42,7 @@ public class Spreetest extends SuiteManager {
     public LoginPage loginpage;
     public HomePage homepage;
     public SearchResultPage searchpage;
+    public productDetails productdetails;
 
    // Actions builder=new Actions(DriverManager.driver);
     //builder.dr
@@ -109,12 +108,25 @@ public class Spreetest extends SuiteManager {
     homepage = loginpage.login(username,password);
     loginpage.successMsg();
     searchpage=homepage.enterSearchItem(searchitem);
-    searchpage.oneProduct();
+    List<String> produlist=searchpage.oneProduct();
+
+    for(int i=0;i<produlist.size();i++) {
+
+       String title= produlist.get(i);
+        Assert.assertTrue(title.toLowerCase().contains(config.getProperty("searchItem")));
+
+
+
+    }
 
 
 
 
-}
+        }
 
 
-}
+
+
+
+    }
+

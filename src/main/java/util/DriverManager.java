@@ -21,16 +21,16 @@ public class DriverManager {
 
     public DriverManager() throws MalformedURLException {
 
-        //String chormeDriverpath = System.getProperty("user.dir") + "/" + "src/main/resources/drivers/chromedriver";
-        //System.setProperty("webdriver.chrome.driver", chormeDriverpath);
+        String chormeDriverpath = System.getProperty("user.dir") + "/" + "src/main/resources/drivers/chromedriver";
+        System.setProperty("webdriver.chrome.driver", chormeDriverpath);
         //driver=new ChromeDriver();
-        //driver = new ChromeDriver();
+        driver = new ChromeDriver();
         //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 
 
 
-        DesiredCapabilities caps = new DesiredCapabilities();
+        /*DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("browser", "Chrome");
         caps.setCapability("browser_version", "78.0");
         caps.setCapability("os", "Windows");
@@ -38,7 +38,7 @@ public class DriverManager {
         caps.setCapability("resolution", "1024x768");
         caps.setCapability("name", "Bstack-[Java] Sample Test");
 
-        driver = new RemoteWebDriver(new URL(URL), caps);
+        driver = new RemoteWebDriver(new URL(URL), caps);*/
         driver.get("https://spree-vapasi-prod.herokuapp.com/");
 
 

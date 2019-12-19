@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import suite.SuiteManager;
 import util.DriverManager;
 
@@ -48,13 +49,10 @@ public class LoginPage extends SuiteManager {
 
      // String expectedata = DriverManager.driver.findElement(By.xpath("//main[@id='content']//*[@class='alert alert-success']")).getText();
       System.out.println("excepted text is" + expectedata);
+      Assert.assertTrue(expectedata.contains(actualdata));
 
 
-      if (actualdata.equals(expectedata)) {
-          System.out.println("pass");
-      } else {
-          System.out.println("fail");
-      }
+
   }
 
 
