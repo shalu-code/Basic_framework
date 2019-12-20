@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -26,13 +27,16 @@ public class SearchResultPage extends SuiteManager {
     private WebElement RailsBag;
 
 
-   /*public List<String> prodlist(WebElement List) {
-       List<WebElement> prods = DriverManager.driver.findElements((By) List);
+  /* public List<String> prodlist(WebElement Field) {
+         Dimension size = Field.getSize();
         List<String> currentOptions = new ArrayList<>();
-        for (WebElement match : prods) {
+        if(size>0) {
+
+            for (WebElement match : prods) {
 
 
-            currentOptions.add(match.getText());
+                currentOptions.add(match.getText());
+            }
         }
         return currentOptions;
     }*/

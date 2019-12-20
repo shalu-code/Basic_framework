@@ -42,14 +42,14 @@ public class LoginPage extends SuiteManager {
 
 
 
-  public void successMsg(){
+  public String successMsg(){
 
-      String actualdata = "Logged in successfully";
+
       String expectedata=successText.getText();
+      return expectedata;
 
-     // String expectedata = DriverManager.driver.findElement(By.xpath("//main[@id='content']//*[@class='alert alert-success']")).getText();
-      System.out.println("excepted text is" + expectedata);
-      Assert.assertTrue(expectedata.contains(actualdata));
+
+
 
 
 

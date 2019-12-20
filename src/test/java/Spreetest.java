@@ -57,7 +57,8 @@ public class Spreetest extends SuiteManager {
         basepage =new BasePage(DriverManager.driver);
         loginpage = basepage.clickLoginButton();
         homepage = loginpage.login(userName,password);
-        loginpage.successMsg();
+        String expectedata=loginpage.successMsg();
+        Assert.assertTrue(expectedata.contains(config.getProperty("actualdata")));
 
         //List<String> products=searchpage.prodlist();
 
@@ -106,7 +107,9 @@ public class Spreetest extends SuiteManager {
     basepage =new BasePage(DriverManager.driver);
     loginpage = basepage.clickLoginButton();
     homepage = loginpage.login(username,password);
-    loginpage.successMsg();
+    String expectedata=loginpage.successMsg();
+    Assert.assertTrue(expectedata.contains(config.getProperty("actualdata")));
+
     searchpage=homepage.enterSearchItem(searchitem);
     List<String> produlist=searchpage.oneProduct();
 
